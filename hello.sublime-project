@@ -7,8 +7,8 @@
 		}
 	],
 	"build_path": "/Users/ricardofleury/newspeak/newspeak/",
-	"application_id": "5d3f0a00-1783-11e5-9b50-ae699d5741cd",
-	"api_key": "TzHlB7oQkFMjruIYaNbn1J",
-	"api_secret": "k2yX5uZ.47rl!#/AoOmw9cLnf3qKRIxstJh",
-	"use_live_datastore": "true"
+	// "application_id": "5d3f0a00-1783-11e5-9b50-ae699d5741cd",
+	// "api_key": "TzHlB7oQkFMjruIYaNbn1J",
+	// "api_secret": "k2yX5uZ.47rl!#/AoOmw9cLnf3qKRIxstJh",
+	// "use_live_datastore": "true"
 }
