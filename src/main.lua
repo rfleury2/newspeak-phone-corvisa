@@ -29,7 +29,18 @@ function send_article(selection)
 	message = "You have saved " .. url .. " for later."
 	ok, err = sms.send(to, from, message)
 	log.debug("This is the ok message: " .. ok)
-	get_main_menu()
+	get_continue_menu()
+end
+
+function get_continue_menu()
+	continue_menu = menu()
+
+	continue_menu.add(tostring(1), "To listen to another article, press 1", get_main_menu)
+	continue_menu.add(tostring(2), "To end the call, press 2", hangup)
+	continue_menu.default(invalid)
+
+	continue_menu.run()
+	get_link_menu()
 end
 
 function select_category(cat)
@@ -73,7 +84,7 @@ function get_main_menu()
 		main_menu.add(tostring(index), "For " .. category .. ", press " .. tostring(index), function() select_category(category) end)
 	end
 	main_menu.run()
-	channel.say("Selected Category: " .. selected_category)
+	channel.say("Here are the top items for " .. selected_category)
 	get_category_menu()
 end
 
@@ -93,13 +104,12 @@ function get_category_menu()
 	-- Category Menu
 	category_menu = menu()
 
-	category_menu.add(tostring(1), "Press " .. tostring(1) .. " for " .. news_content[1].title, function() get_abstract(news_content[1]) end)
-	category_menu.add(tostring(2), "Press " .. tostring(2) .. " for " .. news_content[2].title, function() get_abstract(news_content[2]) end)
-	category_menu.add(tostring(3), "Press " .. tostring(3) .. " for " .. news_content[3].title, function() get_abstract(news_content[3]) end)
-	category_menu.add(tostring(4), "Press " .. tostring(4) .. " for " .. news_content[4].title, function() get_abstract(news_content[4]) end)
-	category_menu.add(tostring(5), "Press " .. tostring(5) .. " for " .. news_content[5].title, function() get_abstract(news_content[5]) end)
+	category_menu.add(tostring(1), "For " .. news_content[1].title .. ", press " .. tostring(1), function() get_abstract(news_content[1]) end)
+	category_menu.add(tostring(2), "For " .. news_content[2].title .. ", press " .. tostring(2), function() get_abstract(news_content[2]) end)
+	category_menu.add(tostring(3), "For " .. news_content[3].title .. ", press " .. tostring(3), function() get_abstract(news_content[3]) end)
+	category_menu.add(tostring(4), "For " .. news_content[4].title .. ", press " .. tostring(4), function() get_abstract(news_content[4]) end)
+	category_menu.add(tostring(5), "For " .. news_content[5].title .. ", press " .. tostring(5), function() get_abstract(news_content[5]) end)
 	category_menu.default(invalid)
-	category_menu.intro("Make your selection, please")
 
 	category_menu.run()
 	get_link_menu()
