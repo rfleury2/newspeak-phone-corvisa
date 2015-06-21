@@ -19,7 +19,7 @@ local speech = require 'summit.speech'
 local json = require 'json'
 local inspect = require "inspect"
 
-local phone_number = channel.data.remotenumber
+local phone_number = channel.data.ani
 channel.say(phone_number)
 
 
