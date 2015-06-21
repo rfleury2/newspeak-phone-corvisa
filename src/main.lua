@@ -1,12 +1,8 @@
 -- This comment enforces unit-test coverage for this file:
 -- coverage: 0
 
-function get_abstract(article)
-    channel.say(article.abstract)
-end
-
-function get_title(article)
-    channel.say(article.title)
+function get_abstract(arg)
+	channel.say(arg.abstract)
 end
 
 function invalid()
@@ -32,20 +28,19 @@ local news_content = json:decode(res.content)
 channel.answer()
 channel.say('Welcome to Newspeak')
 
-local selection = 0
 local my_ivr = menu()
 
-local i = 1
-while i < 5 do
-	my_ivr.add(tostring(i), "Press " .. tostring(i) .. " for " .. news_content[i].title, function() get_abstract(news_content[i]) end)
-	i = i+1
-end
+my_ivr.add(tostring(1), "Press " .. tostring(1) .. " for " .. news_content[1].title, function() get_abstract(news_content[1]) end)
+my_ivr.add(tostring(2), "Press " .. tostring(2) .. " for " .. news_content[2].title, function() get_abstract(news_content[2]) end)
+my_ivr.add(tostring(3), "Press " .. tostring(3) .. " for " .. news_content[3].title, function() get_abstract(news_content[3]) end)
+my_ivr.add(tostring(4), "Press " .. tostring(4) .. " for " .. news_content[4].title, function() get_abstract(news_content[4]) end)
+my_ivr.add(tostring(5), "Press " .. tostring(5) .. " for " .. news_content[5].title, function() get_abstract(news_content[5]) end)
 my_ivr.default(invalid)
+my_ivr.intro("Make your selection, please")
 
-channel.say('Make your selection, please')
 local selection = my_ivr.run()
-repl()
 
+channel.say("Goodbye, bitches!")
 
 channel.hangup()
 
