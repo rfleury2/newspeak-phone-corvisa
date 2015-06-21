@@ -31,8 +31,20 @@ function hangup()
 	channel.hangup()
 end
 
+function get_user_info()
+	-- phone_number = channel.data.ani
+	phone_number = '6039690489'
 
-phone_number = channel.data.ani
+	user_url = "https://getnewspeak.herokuapp.com/api/v1/users/" .. phone_number
+	res, err = http.get(user_url)
+
+	if err then
+		get_main_menu()
+	end
+
+	user_info = json:decode(res.content)
+	channel.say("Welcome to Newspeak, " .. user_info.name)
+end
 
 
 -- Main menu
@@ -93,7 +105,7 @@ end
 
 -- Welcome
 channel.answer()
-channel.say('Welcome to Newspeak')
+get_user_info()
 get_main_menu()
 
 
