@@ -22,12 +22,11 @@ function send_article(selection)
 	local url = selection
 	sms = require "summit.sms"
 
-	-- to = "+1" .. channel.data.ani
-	to = "+16306244913"
-	from = "+1" .. channel.data.dnis
+	to = channel.data.ani
+	from = channel.data.dnis
 	message = "You have saved " .. url .. " for later."
 	ok, err = sms.send(to, from, message)
-	get_link_menu()
+	get_main_menu()
 end
 
 function select_category(cat)
@@ -35,7 +34,7 @@ function select_category(cat)
 end
 
 function hangup()
-	channel.say("Goodbye, bitches!")
+	channel.say("Goodbye!")
 	channel.hangup()
 end
 
