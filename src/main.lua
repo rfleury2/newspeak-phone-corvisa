@@ -6,6 +6,8 @@ menu = require 'summit.menu'
 speech = require 'summit.speech'
 json = require 'json'
 inspect = require "inspect"
+log = require "summit.log"
+
 
 category_names = { 'u.s.', 'world', 'sports', 'business', 'technology', 'science', 'health' }
 
@@ -23,9 +25,12 @@ function send_article(selection)
 	sms = require "summit.sms"
 
 	to = channel.data.ani
-	from = channel.data.dnis
+	from = "+1" .. channel.data.dnis
 	message = "You have saved " .. url .. " for later."
 	ok, err = sms.send(to, from, message)
+	log.debug("This is the ok message: " .. ok)
+	log.debug("This is the err message: " .. err)
+	log.debug("To: " .. to .. ", From: " .. from)
 	get_main_menu()
 end
 
