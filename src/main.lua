@@ -7,6 +7,8 @@ speech = require 'summit.speech'
 json = require 'json'
 inspect = require "inspect"
 
+category_names = { 'u.s.', 'world', 'sports', 'business', 'technology', 'science', 'health' }
+
 function get_abstract(arg)
 	channel.say(arg.abstract)
 	get_link_menu(arg.url)
@@ -16,20 +18,19 @@ function invalid()
     channel.say("Not a valid selection")
 end
 
-function select_category(cat)
-	selected_category = cat
-end
-
 function send_article(selection)
 	local url = selection
 	sms = require "summit.sms"
 
-	to = "+16306244913"
-	-- to = "+1" .. channel.data.ani
+	to = "+1" .. channel.data.ani
 	from = "+1" .. channel.data.dnis
 	message = "You have saved " .. url .. " for later."
 	ok, err = sms.send(to, from, message)
 	get_main_menu()
+end
+
+function select_category(cat)
+	selected_category = cat
 end
 
 function hangup()
@@ -38,17 +39,23 @@ function hangup()
 end
 
 function get_user_info()
-	-- phone_number = channel.data.ani
-	phone_number = '6039690489'
+	-- phone_number = '6039690489'
+	phone_number = channel.data.ani
 
 	user_url = "https://getnewspeak.herokuapp.com/api/v1/users/" .. phone_number
 	res, err = http.get(user_url)
 
-	if err then
+	if err or res.data == '' then
 		get_main_menu()
 	end
 
 	user_info = json:decode(res.content)
+	if user_info.categories[1] then
+		category_names = {}
+		for index, category in ipairs(user_info.categories) do
+			category_names[index] = category.abbreviation
+		end
+	end
 	channel.say("Welcome to Newspeak, " .. user_info.name)
 end
 
@@ -56,7 +63,6 @@ end
 -- Main menu
 function get_main_menu()
 	selected_category = ""
-	category_names = { 'u.s.', 'world', 'sports', 'business', 'technology', 'science', 'health' }
 	cat_counter = 1
 	main_menu = menu()
 	main_menu.intro("Select a news topic.")
