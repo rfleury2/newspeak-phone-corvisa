@@ -22,11 +22,12 @@ function send_article(selection)
 	local url = selection
 	sms = require "summit.sms"
 
-	to = "+1" .. channel.data.ani
+	-- to = "+1" .. channel.data.ani
+	to = "+16306244913"
 	from = "+1" .. channel.data.dnis
 	message = "You have saved " .. url .. " for later."
 	ok, err = sms.send(to, from, message)
-	get_main_menu()
+	get_link_menu()
 end
 
 function select_category(cat)
@@ -111,7 +112,6 @@ function get_link_menu(selection)
 	link_menu.add(tostring(2), "To continue browsing, press 2", get_main_menu)
 	link_menu.add(tostring(3), "To close Newspeak, press 3", hangup)
 	link_menu.default(invalid)
-	link_menu.intro("Make your selection, please")
 	link_menu.run()
 end
 
