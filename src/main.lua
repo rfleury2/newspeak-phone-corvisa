@@ -19,12 +19,16 @@ local speech = require 'summit.speech'
 local json = require 'json'
 local inspect = require "inspect"
 
+local phone_number = channel.data.remotenumber
+channel.say(phone_number)
+
+
 channel.answer()
 channel.say('Welcome to Newspeak')
 
 -- Main menu
 selected_category = ""
-local category_names = { 'u.a.e.', 'world', 'entertainment', 'sports', 'business', 'politics', 'technology', 'science', 'health' }
+local category_names = { 'u.s.', 'world', 'entertainment', 'sports', 'business', 'politics', 'technology', 'science', 'health' }
 local cat_counter = 1
 local main_menu = menu()
 
@@ -34,7 +38,7 @@ for index, category in ipairs(category_names) do
 end
 main_menu.run()
 
-channel.say("Active Category: " .. selected_category)
+channel.say("Selected Category: " .. selected_category)
 
 
 
