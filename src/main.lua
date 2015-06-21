@@ -28,6 +28,7 @@ function send_article(selection)
 	from = "+1" .. channel.data.dnis
 	message = "You have saved " .. url .. " for later."
 	ok, err = sms.send(to, from, message)
+	log.debug("This is the ok message: " .. ok)
 	get_main_menu()
 end
 
