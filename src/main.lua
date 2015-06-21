@@ -22,8 +22,14 @@ end
 
 function send_article(selection)
 	local url = selection
-	repl()
-	-- Not implemented
+	sms = require "summit.sms"
+
+	to = "+16306244913"
+	-- to = "+1" .. channel.data.ani
+	from = "+1" .. channel.data.dnis
+	message = "You have saved " .. url .. " for later."
+	ok, err = sms.send(to, from, message)
+	get_main_menu()
 end
 
 function hangup()
