@@ -24,7 +24,7 @@ channel.say('Welcome to Newspeak')
 
 -- Main menu
 selected_category = ""
-local category_names = { 'u.s.', 'world', 'entertainment', 'sports', 'business', 'politics', 'technology', 'science', 'health' }
+local category_names = { 'u.a.e.', 'world', 'entertainment', 'sports', 'business', 'politics', 'technology', 'science', 'health' }
 local cat_counter = 1
 local main_menu = menu()
 
@@ -43,7 +43,6 @@ channel.say("Active Category: " .. selected_category)
 -- param passed back (category name)
 
 local url = "http://getnewspeak.herokuapp.com/headlines?categories=" .. selected_category
-repl()
 local res, err = http.get(url)
 
 if err then
